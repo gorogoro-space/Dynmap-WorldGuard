@@ -1,6 +1,7 @@
 name: Dynmap-WorldGuard
 main: org.dynmap.worldguard.DynmapWorldGuardPlugin
-version: "${project.version}"
+api-version: 1.15
+version: 1.3
 author: mikeprimm
 depend: [ dynmap, WorldGuard ]
 

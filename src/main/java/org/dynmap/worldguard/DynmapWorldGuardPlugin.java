@@ -14,6 +14,7 @@ import java.util.logging.Logger;
 import org.bukkit.Bukkit;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.configuration.file.FileConfiguration;
+import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
@@ -26,7 +27,7 @@ import org.dynmap.markers.AreaMarker;
 import org.dynmap.markers.MarkerAPI;
 import org.dynmap.markers.MarkerSet;
 
-import com.sk89q.squirrelid.cache.ProfileCache;
+import com.sk89q.worldguard.util.profile.cache.ProfileCache;
 import com.sk89q.worldedit.math.BlockVector2;
 import com.sk89q.worldedit.math.BlockVector3;
 import com.sk89q.worldedit.world.World;
@@ -164,10 +165,12 @@ public class DynmapWorldGuardPlugin extends JavaPlugin {
             if(ownerstyle.isEmpty() != true) {
                 DefaultDomain dd = region.getOwners();
                 PlayerDomain pd = dd.getPlayerDomain();
+                Player p;
                 if(pd != null) {
-                    for(String p : pd.getPlayers()) {
-                        if(as == null) {
-                            as = ownerstyle.get(p.toLowerCase());
+                    for(UUID uuid : pd.getUniqueIds()) {
+                        p = getServer().getPlayer(uuid);
+                        if(as == null && p != null) {
+                            as = ownerstyle.get(p.getName().toLowerCase());
                             if (as != null) break;
                         }
                     }
@@ -178,19 +181,20 @@ public class DynmapWorldGuardPlugin extends JavaPlugin {
                         }
                     }
                     if (as == null) {
-                    	for(String p : pd.getPlayers()) {
+                      for(UUID uuid : pd.getUniqueIds()) {
+                            p = getServer().getPlayer(uuid);
                             if (p != null) {
-                                as = ownerstyle.get(p.toLowerCase());
+                                as = ownerstyle.get(p.getName().toLowerCase());
                                 if (as != null) break;
                             }
                         }
                     }
                 }
                 if (as == null) {
-                    Set<String> grp = dd.getGroups();
-                    if(grp != null) {
-                        for(String p : grp) {
-                            as = ownerstyle.get(p.toLowerCase());
+                    Set<String> grps = dd.getGroups();
+                    if(grps != null) {
+                        for(String grp : grps) {
+                            as = ownerstyle.get(grp.toLowerCase());
                             if (as != null) break;
                         }
                     }
