@@ -1,1 +1,12 @@
 https://dev.bukkit.org/projects/dynmap-worldguard
+
+License & Credits
+This plugin (modified version) is based on the original work Dynmap-WorldGuard, licensed under the Apache License, Version 2.0.
+
+This software includes and is subject to the following licenses:
+
+Apache License, Version 2.0: [Read Full License](https://github.com/gorogoro-space/Dynmap-WorldGuard/blob/master/LICENSE)
+
+BSD 2-Clause License (Original code by Tyler Blair): [Read License & Copyright Notice](https://github.com/gorogoro-space/Dynmap-WorldGuard/blob/master/src/main/java/org/dynmap/worldguard/MetricsLite.java)
+
+Modified by: kubotan
